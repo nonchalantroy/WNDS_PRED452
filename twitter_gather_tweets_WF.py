@@ -5,9 +5,17 @@ import json  # methods for working with JSON data
 import yaml  # import config for API keys
 from pandas.io.json import json_normalize
 
-q = "AWS"  # string to search
+q = "Wells Fargo"  # string to search
 
 # want to keep API keys out of code for security reasons
+
+# YAML file should have the following:
+# twitter_api:
+#    CONSUMER_KEY: xxxx
+#    CONSUMER_SECRET: xxxx
+#    OAUTH_TOKEN: xxxx
+#    OAUTH_TOKEN_SECRET: xxxx
+
 # load the YAML file with the twitter API details
 with open("../Secrets/config.yml", 'r') as ymlfile:
     cfg = yaml.load(ymlfile)
@@ -19,16 +27,17 @@ else:
     line_termination = '\n'  # Unix/Linus/Mac line termination
 
 # name used for JSON file storage        
-json_filename = 'Output/my_tweet_file.json'
+json_filename = '../Output/my_tweet_file.json'
 
-# name used for JSON file storage
-csv_filename = 'Output/my_tweet_file.csv'
+# name used for CSV file storage
+# CSV useful for analysis with ConText
+csv_filename = '../Output/my_tweet_file.csv'
 
 # name for text file for review of results
-full_text_filename = 'Output/my_tweet_review_file.txt'
+full_text_filename = '../Output/my_tweet_review_file.txt'
 
 # name for text from tweets
-partial_text_filename = 'Output/my_tweet_text_file.txt'
+partial_text_filename = '../Output/my_tweet_text_file.txt'
 
 
 # See Russell (2014) and Twitter site for documentation
