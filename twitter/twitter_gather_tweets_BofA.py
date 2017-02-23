@@ -4,11 +4,15 @@ import twitter  # work with Twitter APIs
 import json  # methods for working with JSON data
 import yaml  # import config for API keys
 from pandas.io.json import json_normalize
+import time # so we can add timestamps to files
 
-q = "Wells Fargo"  # string to search
+q = "Bank of America"  # string to search
+q_file = "BofA"
 
-# want to keep API keys out of code for security reasons
+t = time.localtime()
+timestamp = time.strftime('%Y%m%d_%H%M%S', t)
 
+# want to keep API keys out of code for security
 # YAML file should have the following:
 # twitter_api:
 #    CONSUMER_KEY: xxxx
@@ -17,7 +21,7 @@ q = "Wells Fargo"  # string to search
 #    OAUTH_TOKEN_SECRET: xxxx
 
 # load the YAML file with the twitter API details
-with open("../Secrets/config.yml", 'r') as ymlfile:
+with open("../../Secrets/config.yml", 'r') as ymlfile:
     cfg = yaml.load(ymlfile)
 
 windows_system = False  # set to True if this is a Windows computer
@@ -27,17 +31,17 @@ else:
     line_termination = '\n'  # Unix/Linus/Mac line termination
 
 # name used for JSON file storage        
-json_filename = '../Output/my_tweet_file.json'
+json_filename = '../../Output-' + q_file + '/tweet_file-' + timestamp + '.json'
 
 # name used for CSV file storage
 # CSV useful for analysis with ConText
-csv_filename = '../Output/my_tweet_file.csv'
+csv_filename = '../../Output-' + q_file + '/tweet_file-' + timestamp + '.csv'
 
 # name for text file for review of results
-full_text_filename = '../Output/my_tweet_review_file.txt'
+full_text_filename = '../../Output-' + q_file + '/tweet_full_text_file-' + timestamp + '.txt'
 
 # name for text from tweets
-partial_text_filename = '../Output/my_tweet_text_file.txt'
+partial_text_filename = '../../Output-' + q_file + '/tweet_partial_text_file-' + timestamp + '.txt'
 
 
 # See Russell (2014) and Twitter site for documentation
